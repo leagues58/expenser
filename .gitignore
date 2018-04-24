@@ -31,3 +31,7 @@ npm-debug.log
 
 
 package-lock.json
+public/javascripts/.DS_Store
+public/.DS_Store
+css/.DS_Store
+.DS_Store
