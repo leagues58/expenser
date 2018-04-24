@@ -1,2 +1,67 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="../stylesheets/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{title}}</h1>
+        <div class="row">
+            <form class="col s12" method="POST">
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="" id="store_name" name="store_name" type="text" class="validate">
+                        <label for="store_name">Store Name:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="store_city" name="store_city"type="text" class="validate">
+                        <label for="city">City:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="store_state">
+                            <option value="SC">South Carolina</option>
+                            <option value="GA">Georgia</option>
+                            <option value="AL">Alaska</option>
+                            <option value="CA">California</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OR">Oregon</option>
+                            <option value="ME">Maine</option>
+                        </select>
+                        <label>State:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Add<i class="material-icons right">send</i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{#if items}}
+        Data Entered: {{items.store_name}}, {{items.store_city}}, {{items.store_state}}
+    {{/if}}
+
+        <script type="text/javascript" src="../javascripts/materialize.js"></script>
+        <script>
+            var elem = document.querySelector('select');
+            let options = {};
+            var instance = M.FormSelect.init(elem, options);
+
+            // Or with jQuery
+            //$(document).ready(function(){
+             //   $('select').formSelect();
+            //});
+        </script>
+</body>
+
+
