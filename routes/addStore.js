@@ -1,6 +1,6 @@
 var express = require('express');
 var router  = express.Router();
-//var db      = require('../db.js');
+var db      = require('./../db');
 
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -24,12 +24,12 @@ router.post('/', function(req, res, next) {
     } else {
         // data from form is valid.
         // check if store with same name already exists.
-        /*if (lfStoreExists(req.body.store_name, req.body.store_city, req.body.store_state)) {
+        if (lfStoreExists(req.body.store_name, req.body.store_city, req.body.store_state)) {
 
         } else {
             // add store
             lfAddStore(req.body.store_name, req.body.store_city, req.body.store_state);
-        }*/
+        }
 
     }
     
@@ -44,6 +44,21 @@ function lfStoreExists(strStoreName, strStoreCity, strStoreState) {
 }
 
 function lfAddStore(strStoreName, strStoreCity, strStoreState) {
+
+    db.connection.connect(function(err) {
+        if (err) {
+          console.error('error connecting: ' + err.stack);
+          return;
+        }
       
+        console.log('connected as id ' + db.connection.threadId);
+      });
+
+    db.connection.query('SELECT * FROM store s', function (error, results, fields) {
+        if (error) throw error;
+        console.log('Stores found: ', results[0].name);
+    });
+
+    db.connection.end();
 }
 module.exports = router;
