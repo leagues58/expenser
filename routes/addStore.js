@@ -5,6 +5,8 @@ var db      = require('./../db');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
+var storeInserted = false;
+
 /* GET addStore page. */
 router.get('/', function(req, res, next) {
   res.render('addStore', { title: 'Add Store' });
@@ -28,14 +30,21 @@ router.post('/', function(req, res, next) {
 
         } else {
             // add store
-            lfAddStore(req.body.store_name, req.body.store_city, req.body.store_state);
+            if(lfAddStore(req.body.store_name, req.body.store_city, req.body.store_state)) {
+                storeInserted = true;
+            }
         }
 
     }
     
     // res.render('addStore', { title: 'Add Store', text: req.body.store_name + ' banana5'});        
 
-    res.render('addStore', { title: 'Add Store', items:{store_name:  req.body.store_name, store_city: req.body.store_city, store_state: req.body.store_state}});
+    res.render('addStore', { title: 'Add Store', data:{
+                                                    store_name:  req.body.store_name, 
+                                                    store_city: req.body.store_city, 
+                                                    store_state: req.body.store_state,
+                                                    store_inserted: storeInserted
+                                                }});
   });
 
 
@@ -54,11 +63,15 @@ function lfAddStore(strStoreName, strStoreCity, strStoreState) {
         console.log('connected as id ' + db.connection.threadId);
       });
 
-    db.connection.query('SELECT * FROM store s', function (error, results, fields) {
+    // VERY temporary insert statement as proof of concept
+    var query = "insert into store (name, city, state) VALUES ('" + strStoreName + "', '" + strStoreCity  + "', '" + strStoreState + "')";
+
+    db.connection.query(query, function (error, results, fields) {
         if (error) throw error;
-        console.log('Stores found: ', results[0].name);
+        return false;
     });
 
     db.connection.end();
+    return true;
 }
 module.exports = router;

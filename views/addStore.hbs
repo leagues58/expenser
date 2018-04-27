@@ -47,8 +47,9 @@
             </form>
         </div>
     </div>
-    {{#if items}}
-        Data Entered: {{items.store_name}}, {{items.store_city}}, {{items.store_state}}
+    {{#if data}}
+        Data: {{data.store_name}}, {{data.store_city}}, {{data.store_state}}<br>
+        Added: {{data.store_inserted}}
     {{/if}}
 
         <script type="text/javascript" src="../javascripts/materialize.js"></script>
