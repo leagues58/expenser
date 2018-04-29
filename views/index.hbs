@@ -10,9 +10,12 @@
 </head>
 <body>
     {{>navbar}}
-    <h1>{{title}}</h1>
-    <p>Welcome to {{title}}</p>    
-     <div class="material-icons">add_circle_outline</div>
+
+   <div class="fixed-action-btn">
+        <a href="/addItem" class="btn-floating btn-large red">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
 </body>
 
 
@@ -23,10 +26,14 @@
 <script type="text/javascript" src="../javascripts/materialize.js"></script>
 <script>
     // init dropdown
-    var elem = document.querySelector('select');
-    var instance = M.FormSelect.init(elem, {});
+    var elemSelect = document.querySelector('select');
+    var instanceSelect = M.FormSelect.init(elemSelect, {});
 
     // init navbar
-    elem = document.querySelector('.sidenav');
-    instance = M.Sidenav.init(elem, {});
+    var elemNav = document.querySelector('.sidenav');
+    var instanceNav = M.Sidenav.init(elemNav, {});
+
+    // init FAB
+    elemFAB = document.querySelector('.fixed-action-btn');
+    instanceFAB = M.FloatingActionButton.init(elemFAB, {});
 </script>
