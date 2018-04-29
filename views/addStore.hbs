@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    {{>navbar}}
     <div class="container">
         <h1>{{title}}</h1>
         <div class="row">
@@ -42,7 +43,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Add<i class="material-icons right">send</i></button>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Add Store<i class="material-icons left">add</i></button>
                 </div>
             </form>
         </div>
@@ -54,14 +55,13 @@
 
         <script type="text/javascript" src="../javascripts/materialize.js"></script>
         <script>
+            // init dropdown
             var elem = document.querySelector('select');
-            let options = {};
-            var instance = M.FormSelect.init(elem, options);
+            var instance = M.FormSelect.init(elem, {});
 
-            // Or with jQuery
-            //$(document).ready(function(){
-             //   $('select').formSelect();
-            //});
+            // init navbar
+            elem = document.querySelector('.sidenav');
+            instance = M.Sidenav.init(elem, {});
         </script>
 </body>
 
