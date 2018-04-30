@@ -17,16 +17,19 @@
             <form class="col s12" method="POST">
 
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input value="" id="store_name" name="store_name" type="text" class="validate">
-                        <label for="store_name">Store Name:</label>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="input-field col s6">
-                        <input id="store_city" name="store_city"type="text" class="validate">
-                        <label for="city">City:</label>
+                        {{#if storeData}}
+                            <select name="store_name">
+                                {{#each storeData}}
+                                    <option value="{{this.store_id}}">{{this.name}} - {{this.city}}, {{this.state}}</option>
+                                {{/each}}
+                            </select>
+                            <label for="store_name">Store</label>
+                        {{else}}
+                            <input value="" id="store_name" name="store_name" type="text" class="validate">
+                            <label for="store_name">Store Name:</label>
+                        {{/if}}
+
                     </div>
                     <div class="input-field col s6">
                         <select name="store_state">
